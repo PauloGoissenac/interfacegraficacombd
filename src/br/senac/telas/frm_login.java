@@ -4,18 +4,28 @@
  * and open the template in the editor.
  */
 package br.senac.telas;
-
+import java.sql.*;
+import br.senac.conexaoBD.newpackage.Conexao;
 /**
  *
  * @author paulo.gois
  */
 public class frm_login extends javax.swing.JFrame {
+Connection conexao = null;
+PreparedStatement ps = null;
+ResultSet rs = null;
 
     /**
      * Creates new form frm_login
      */
     public frm_login() {
         initComponents();
+        conexao = Conexao.Conector();
+        
+        if (conexao!=null) {
+            lblstatus.setText("Conectado! ");
+        }else{
+            lblstatus.setText("Erro de conexão! ");}
     }
 
     /**
@@ -34,6 +44,7 @@ public class frm_login extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        lblstatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("btnt_login");
@@ -50,6 +61,8 @@ public class frm_login extends javax.swing.JFrame {
         jButton1.setText("Login");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senac/icones/logo.png"))); // NOI18N
+
+        lblstatus.setText("Status");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,6 +88,10 @@ public class frm_login extends javax.swing.JFrame {
                                     .addComponent(jPasswordField1)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))))
                         .addGap(160, 160, 160))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addComponent(lblstatus)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +110,9 @@ public class frm_login extends javax.swing.JFrame {
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(38, 38, 38)
                 .addComponent(jButton1)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblstatus)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,5 +178,6 @@ public class frm_login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblstatus;
     // End of variables declaration//GEN-END:variables
 }
